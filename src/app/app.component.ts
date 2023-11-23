@@ -6,5 +6,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MyAngularApp';
+  name = 'Angular';
+  page = 1;
+  items: any[] = [];
+  displayedItems: any[] = []; // Danh sách hiển thị trên mỗi trang
+  pageSize = 10; // Số mục trên mỗi trang
+
+  constructor() {
+    for (let i = 1; i <= 100; i++) {
+      this.items.push({ title: 'Brycen ' + i });
+    }
+
+    this.updateDisplayedItems();
+  }
+
+  onPageChange(page: number) {
+    this.page = page;
+    this.updateDisplayedItems();
+  }
+
+  updateDisplayedItems() {
+    const startIndex = (this.page - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.displayedItems = this.items.slice(startIndex, endIndex);
+  }
 }
