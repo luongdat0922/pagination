@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './model/user';
-import { Store, select } from '@ngrx/store';
-import { IUserState } from './users/user.state';
-import * as uActions from './users/user.action';
+import { Store, createFeatureSelector, select } from '@ngrx/store';
+import { UserState } from './user/user.state';
+import { loadUsers } from './user/user.action';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   pageSize = 10; // Số mục trên mỗi trang
   users$!: Observable<User[]>;
 
-  constructor(private store: Store<IUserState>) {
+  constructor(private store: Store<UserState>) {
     for (let i = 1; i <= 100; i++) {
       this.items.push({ title: 'Brycen ' + i });
     }
@@ -27,10 +27,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(uActions.getAllUsers());
-    this.users$ = this.store.select(state => state.users);
-    this.users$.subscribe((data) => {
-      console.log(data);
+    this.store.dispatch(loadUsers());
+    const userStateSelector = createFeatureSelector<UserState>('users');
+    this.store.select(userStateSelector).subscribe(userState => {
+      console.log(userState.entities);
     });
   }
 
