@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './model/user';
-import { Store, createFeatureSelector, select } from '@ngrx/store';
-import { UserState } from './user/user.state';
-import { loadUsers } from './user/user.action';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +16,7 @@ export class AppComponent implements OnInit {
   pageSize = 10; // Số mục trên mỗi trang
   users$!: Observable<User[]>;
 
-  constructor(private store: Store<UserState>) {
+  constructor(private store: Store) {
     for (let i = 1; i <= 100; i++) {
       this.items.push({ title: 'Brycen ' + i });
     }
@@ -27,11 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadUsers());
-    const userStateSelector = createFeatureSelector<UserState>('users');
-    this.store.select(userStateSelector).subscribe(userState => {
-      console.log(userState.entities);
-    });
+
   }
 
   onPageChange(page: number) {
