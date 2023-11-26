@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
-export abstract class IService<T> {
+export abstract class CoreService<T> {
 
     get apiUrl(): string {
-        return "http://localhost:3000/api/" + this.entityName;
+        return environment.apiUrl + this.entityName;
     }
 
     constructor(protected entityName: string, protected http: HttpClient) { }

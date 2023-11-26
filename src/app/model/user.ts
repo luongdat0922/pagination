@@ -1,3 +1,5 @@
+import { IList } from "../core/core.model";
+
 export interface User {
     userName: string;
     fullName: string;
@@ -12,3 +14,5 @@ export interface User {
     passExpired: string;
     status: number;
 }
+
+export interface IUserList extends IList<User> { }

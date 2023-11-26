@@ -1,10 +1,4 @@
 <div style="margin: 20px;">
-    <ngb-pagination
-      [collectionSize]="totalItems"
-      [(page)]="currentPage"
-      [maxSize]="maxSize"
-      [rotate]="rotate"
-      [boundaryLinks]="boundaryLinks"
-      (pageChange)="pageChanged.emit($event)"
-    ></ngb-pagination>
-  </div>
+  <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" [maxSize]="maxSize" [rotate]="rotate"
+    [boundaryLinks]="boundaryLinks" (pageChange)="pageChanged.emit($event)"></ngb-pagination>
+</div>

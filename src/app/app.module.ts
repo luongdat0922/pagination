@@ -8,21 +8,23 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { userReducer } from './user/user.reducer';
-import { UserEffects } from './user/user.effect';
+import { UsersComponent } from './users/users.component';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-   PaginationComponent
+   PaginationComponent,
+   UsersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    EffectsModule.forRoot([UserEffects]),
     HttpClientModule,
-    StoreModule.forRoot({ users: userReducer }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot({}),
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
